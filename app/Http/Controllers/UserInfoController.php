@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\UserInfo;
+use App\Http\Resources\UserInfo as UserInfoResource;
+
+class UserInfoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $userinfo = UserInfo::paginate(5);
+
+        return UserInfoResource::collection($userinfo);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $userinfo = $request->isMethod('put') ? UserInfo::findOrFail($request->id) : new UserInfo;
+
+        $userinfo-> id        = $request->input('id');
+        $userinfo-> firstname = $request->input('firstname');
+        $userinfo-> lastname  = $request->input('lastname');
+
+        if ($userinfo->save())
+        {
+            return new UserInfoResource($userinfo);
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $userinfo = UserInfo::findOrFail($id);
+        return new UserInfoResource($userinfo);
+    }
+
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $userinfo = UserInfo::findOrFail($id);
+
+        if($userinfo->delete())
+        {
+            return new UserInfoResource($userinfo);
+        }
+        
+    }
+}
