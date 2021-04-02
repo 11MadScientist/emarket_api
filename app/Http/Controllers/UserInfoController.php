@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserInfo;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserInfo as UserInfoResource;
 
 class UserInfoController extends Controller
@@ -48,9 +49,9 @@ class UserInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($email)
     {
-        $userinfo = UserInfo::findOrFail($id);
+        $userinfo = DB::table('userinfo')->where('email', $email)->first();
         return new UserInfoResource($userinfo);
     }
 
