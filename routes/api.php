@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//===============userinfo=================
 //fetch list of userinfo
 Route::get('userinfo', 'App\Http\Controllers\UserInfoController@index');
 
@@ -33,3 +34,7 @@ Route::put('userinfo', 'App\Http\Controllers\UserInfoController@store');
 //delete single data
 Route::delete('userinfo/{id}', 'App\Http\Controllers\UserInfoController@destroy');
 
+
+//==============storeinfo=================
+//fetch list of userinfo
+Route::get('storeinfo', 'App\Http\Controllers\StoreInfoController@index');
