@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('userinfo', 'App\Http\Controllers\UserInfoController@index');
 
 //fetch single userinfo
-Route::get('userinfo/{id}', 'App\Http\Controllers\UserInfoController@show');
+Route::get('userinfo/{email}', 'App\Http\Controllers\UserInfoController@show');
 
 //adding new data to userinfo
 Route::post('userinfo', 'App\Http\Controllers\UserInfoController@store');
@@ -38,3 +38,8 @@ Route::delete('userinfo/{id}', 'App\Http\Controllers\UserInfoController@destroy'
 //==============storeinfo=================
 //fetch list of userinfo
 Route::get('storeinfo', 'App\Http\Controllers\StoreInfoController@index');
+
+
+
+//============product=====================
+Route::get('products','App\Http\Controllers\ProductController@show');

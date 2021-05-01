@@ -18,8 +18,12 @@ class UserInfo extends JsonResource
             'id'        => $this->id,
             'firstname' => $this->firstname,
             'lastname'  => $this->lastname,
+            'password'  => $this->password,
             'email'     => $this->email,
-            'usertype'  => $this->usertype
+            'addresss'  => $this->password,
+            'usertype'  => $this->usertype,
+            'created_at'=> $this->created_at,
+            'profilepic'=> $this->profilepic,
         ];
     }
 }

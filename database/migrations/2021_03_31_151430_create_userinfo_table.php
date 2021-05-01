@@ -22,6 +22,7 @@ class CreateUserinfoTable extends Migration
             $table->string('address');
             $table->string('phonenumber');
             $table->string('usertype')->nullable();
+            $table->string('profilepic')->nullable();
             $table->timestamps();
         });
     }
