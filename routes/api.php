@@ -39,7 +39,11 @@ Route::delete('userinfo/{id}', 'App\Http\Controllers\UserInfoController@destroy'
 //fetch list of userinfo
 Route::get('storeinfo', 'App\Http\Controllers\StoreInfoController@index');
 
+//fetch single storeinfo
+Route::get('storeinfo/{acc_id}', 'App\Http\Controllers\StoreInfoController@show');
 
+//adding new data to storeinfo
+Route::post('storeinfo', 'App\Http\Controllers\StoreInfoController@store');
 
 //============product=====================
 Route::get('products','App\Http\Controllers\ProductController@show');

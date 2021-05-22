@@ -39,7 +39,17 @@ class StoreInfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeinfo = $request->isMethod('put') ? StoreInfo::findorfail($request->id) : new StoreInfo;
+
+        $storeinfo-> id              = $request->input('id');
+        $storeinfo-> acc_id          = $request->input('acc_id');
+        $storeinfo-> store_name      = $request->input('store_name');
+        $storeinfo-> store_location  = $request->input('store_location');
+
+        if($storeinfo->save())
+        {
+            return new StoreInfoResource($storeinfo);
+        }
     }
 
     /**
@@ -51,6 +61,8 @@ class StoreInfoController extends Controller
     public function show($id)
     {
         //
+        $storeinfo = DB::table('storeinfo')->where('acc_id', $acc_id)->first();
+        return new StoreInfoResource($storeinfo);
     }
 
     /**
