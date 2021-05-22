@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Cart;
+use App\Http\Resources\Cart as CartResource;
 use Illuminate\Support\Facades\DB;
-use App\Http\Resources\Product as ProductResource;
 
-class ProductController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return DB::table('products')
-        ->join('storeinfo', 'storeinfo.id', 'products.store_id')
-        ->select('products.id', 'store_id', 'category_id', 'category_name', 'prod_name', 'prod_img', 'prod_price', 'prod_unit',
-                 'prod_desc', 'prod_stock', 'prod_sales', 'prod_avail', 'prod_favorite', 'store_name', 'store_location')
+        return DB::table('cart')
         ->get();
     }
 
@@ -41,7 +38,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = $request->isMethod('put') ? Cart::findOrFail($request->id) : new Cart;
+
+        $cart-> id       = $request->input('id');
+        $cart-> acc_id   = $request->input('acc_id');
+        $cart-> store_id = $request->input('store_id');
+        $cart-> prod_id  = $request->input('prod_id');
+        $cart-> prod_qty = $request->input('prod_qty');
+        $cart-> total    = $request->input('total');
+
+        if ($cart->save())
+        {
+            return new CartResource($cart);
+        }
     }
 
     /**
@@ -50,26 +59,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($acc_id)
     {
-        return DB::table('products')
-        ->join('storeinfo', 'storeinfo.id', 'products.store_id')
-        ->select('products.id', 'store_id', 'category_id', 'category_name', 'prod_name', 'prod_img', 'prod_price', 'prod_unit',
-                 'prod_desc', 'prod_stock', 'prod_sales', 'prod_avail', 'prod_favorite', 'store_name', 'store_location')
-        ->where('products.id', $id)
+        $cart = DB::table('cart')
+        ->where('acc_id', '=', $acc_id)
         ->get();
+        return CartResource::collection($cart);
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -91,6 +89,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cart = Cart::findOrFail($id);
+
+        if($cart->delete())
+        {
+            return new CartResource($cart);
+        }
     }
 }

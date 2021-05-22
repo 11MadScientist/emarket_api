@@ -15,15 +15,16 @@ class UserInfo extends JsonResource
     public function toArray($request)
     {
         return[
-            'id'        => $this->id,
-            'firstname' => $this->firstname,
-            'lastname'  => $this->lastname,
-            'password'  => $this->password,
-            'email'     => $this->email,
-            'addresss'  => $this->password,
-            'usertype'  => $this->usertype,
-            'created_at'=> $this->created_at,
-            'profilepic'=> $this->profilepic,
+            'id'         => $this->id,
+            'firstname'  => $this->firstname,
+            'lastname'   => $this->lastname,
+            'password'   => $this->password,
+            'email'      => $this->email,
+            'address'   => $this->address,
+            'phonenumber'=> $this->phonenumber,
+            'usertype'   => $this->usertype,
+            'created_at' => $this->created_at,
+            'profilepic' => $this->profilepic,
         ];
     }
 }

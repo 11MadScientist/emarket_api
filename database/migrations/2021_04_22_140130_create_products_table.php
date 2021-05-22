@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->integer('store_id');
             $table->integer('category_id');
             $table->string('category_name');
-            $table->integer('prod_id');
             $table->string('prod_name');
             $table->string('prod_img');
             $table->double('prod_price', 8, 2);
