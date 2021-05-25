@@ -41,7 +41,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $products = $request->isMethod('put') ? Product::findOrFail($request->id) : new Product;
+
+        $products-> id                = $request->input('id');
+        $products-> store_id          = $request->input('store_id');
+        $products-> category_id       = $request->input('category_id');
+        $products-> category_name     = $request->input('category_name');
+        $products-> prod_name         = $request->input('prod_name');
+        $products-> prod_img          = $request->input('prod_img');
+        $products-> prod_price         = $request->input('prod_price');
+        $products-> prod_unit          = $request->input('prod_unit');
+        $products-> prod_desc          = $request->input('prod_desc');
+        $products-> prod_stock         = $request->input('prod_stock');
+        $products-> prod_sales         = $request->input('prod_sales');
+        $products-> prod_avail         = $request->input('prod_avail');
+        $products-> prod_favorite      = $request->input('prod_favorite');
+
+        if ($products->save())
+        {
+            return new ProductResource($products);
+        }
     }
 
     /**

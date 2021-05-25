@@ -14,6 +14,13 @@ class StoreInfo extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return[
+            'id'               => $this->id,
+            'acc_id'           => $this->acc_id,
+            'store_name'       => $this->store_name,
+            'store_location'   => $this->store_location,
+            'created_at'       => $this->created_at,
+            'updated_at'       => $this->updated_at,
+        ];
     }
 }

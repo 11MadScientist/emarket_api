@@ -32,13 +32,14 @@ class UserInfoController extends Controller
     {
         $userinfo = $request->isMethod('put') ? UserInfo::findOrFail($request->id) : new UserInfo;
 
-        $userinfo-> id          = $request->input('id');
-        $userinfo-> firstname   = $request->input('firstname');
-        $userinfo-> lastname    = $request->input('lastname');
-        $userinfo-> password    = $request->input('password');
-        $userinfo-> email       = $request->input('email');
-        $userinfo-> phonenumber = $request->input('phonenumber');
-        $userinfo->address      = $request->input('address');
+        $userinfo-> id           = $request->input('id');
+        $userinfo-> firstname    = $request->input('firstname');
+        $userinfo-> lastname     = $request->input('lastname');
+        $userinfo-> password     = $request->input('password');
+        $userinfo-> email        = $request->input('email');
+        $userinfo-> phonenumber  = $request->input('phonenumber');
+        $userinfo->address       = $request->input('address');
+        $userinfo->usertype      = $request->input('usertype');
 
         if ($userinfo->save())
         {
