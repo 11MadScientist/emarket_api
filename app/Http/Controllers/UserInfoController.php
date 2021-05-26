@@ -41,6 +41,7 @@ class UserInfoController extends Controller
         $userinfo-> address     = $request->input('address');
         $userinfo-> usertype    = $request->input('usertype');
 
+
         if ($userinfo->save())
         {
             return new UserInfoResource($userinfo);

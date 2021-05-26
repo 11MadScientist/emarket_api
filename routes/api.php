@@ -48,6 +48,9 @@ Route::get('products','App\Http\Controllers\ProductController@index');
 //single fetch
 Route::get('products/{id}','App\Http\Controllers\ProductController@show');
 
+//adding new product to products
+Route::post('products','App\Http\Controllers\ProductController@store');
+
 
 //============cart========================
 //fetch addtocart products without acc id

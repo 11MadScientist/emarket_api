@@ -58,7 +58,7 @@ class StoreInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($acc_id)
     {
         //
         $storeinfo = DB::table('storeinfo')->where('acc_id', $acc_id)->first();
