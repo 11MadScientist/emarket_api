@@ -47,6 +47,9 @@ Route::post('storeinfo', 'App\Http\Controllers\StoreInfoController@store');
 Route::get('products','App\Http\Controllers\ProductController@index');
 //single fetch
 Route::get('products/{id}','App\Http\Controllers\ProductController@show');
+//fetching data for seller
+Route::get('storeproducts/{id}','App\Http\Controllers\ProductController@storeProducts');
+
 
 //adding new product to products
 Route::post('products','App\Http\Controllers\ProductController@store');
@@ -63,6 +66,7 @@ Route::post('cart', 'App\Http\Controllers\CartController@store');
 Route::put('cart', 'App\Http\Controllers\CartController@store');
 //deleting data in cart table
 Route::delete('cart/{id}','App\Http\Controllers\CartController@destroy');
+Route::delete('removeCart/{id}','App\Http\Controllers\CartController@removeCart');
 
 
 //==========mytransactions===============
@@ -81,6 +85,8 @@ Route::get('userorder/{transaction_id}','App\Http\Controllers\OrderController@ge
 Route::get('sellerorder/{store_id}','App\Http\Controllers\OrderController@getByStore');
 //=======storing data in order table
 Route::post('order','App\Http\Controllers\OrderController@store');
+Route::put('order','App\Http\Controllers\OrderController@store');
 //======deleting data by id
 Route::delete('order/{id}','App\Http\Controllers\OrderController@destroy');
+
 

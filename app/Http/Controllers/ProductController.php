@@ -79,6 +79,16 @@ class ProductController extends Controller
         ->get();
     }
 
+    public function storeProducts($id)
+    {
+        return DB::table('products')
+        ->join('storeinfo', 'storeinfo.id', 'products.store_id')
+        ->select('products.id', 'store_id', 'category_id', 'category_name', 'prod_name', 'prod_img', 'prod_price', 'prod_unit',
+                 'prod_desc', 'prod_stock', 'prod_sales', 'prod_avail', 'prod_favorite', 'store_name', 'store_location')
+        ->where('storeinfo.acc_id', $id)
+        ->get();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

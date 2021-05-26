@@ -88,6 +88,12 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function removeCart($id)
+    {
+        $cart = DB::table('cart')->where('id','=', $id)->delete();
+        return $cart;
+    }
+
     public function destroy($id)
     {
         $cart = DB::table('cart')->where('acc_id','=', $id)->delete();
