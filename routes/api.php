@@ -72,6 +72,8 @@ Route::get('mytransactions/{acc_id}','App\Http\Controllers\MyTransactionsControl
 Route::post('mytransactions', 'App\Http\Controllers\MyTransactionsController@store');
 //editing data in mytransactions table
 Route::put('mytransactions', 'App\Http\Controllers\MyTransactionsController@store');
+//======deleting data by transaction_id
+Route::delete('mytransactions/{id}','App\Http\Controllers\MyTransactionsController@deleteTransaction');
 
 //========order=========================
 //getting information from order table
@@ -79,3 +81,6 @@ Route::get('userorder/{transaction_id}','App\Http\Controllers\OrderController@ge
 Route::get('sellerorder/{store_id}','App\Http\Controllers\OrderController@getByStore');
 //=======storing data in order table
 Route::post('order','App\Http\Controllers\OrderController@store');
+//======deleting data by id
+Route::delete('order/{id}','App\Http\Controllers\OrderController@destroy');
+

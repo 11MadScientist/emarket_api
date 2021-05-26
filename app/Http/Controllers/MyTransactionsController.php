@@ -71,8 +71,12 @@ class MyTransactionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteTransaction($id)
     {
-        //
+        $transaction = DB::table('myTransactions')->where('id','=', $id)->delete();
+
+        $order = DB::table('order')->where('transaction_id','=', $id)->delete();
+        return $order;
     }
+
 }

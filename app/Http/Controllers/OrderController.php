@@ -98,6 +98,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = DB::table('order')->where('id','=', $id)->delete();
+        return $order;
     }
 }
