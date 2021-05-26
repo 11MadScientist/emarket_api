@@ -19,6 +19,7 @@ class CreateCartTable extends Migration
             $table->integer("store_id");
             $table->integer("prod_id");
             $table->integer("prod_qty");
+            $table->double("prod_price");
             $table->double("total");
             $table->timestamps();
         });

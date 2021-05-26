@@ -64,4 +64,15 @@ Route::delete('cart/{id}','App\Http\Controllers\CartController@destroy');
 
 //==========mytransactions===============
 //fetch transactions using id
-Route::get('mytransactions/{user_id}','App\Http\Controllers\MyTransactionsController@show');
+Route::get('mytransactions/{acc_id}','App\Http\Controllers\MyTransactionsController@index');
+//storing data in mytransactions table
+Route::post('mytransactions', 'App\Http\Controllers\MyTransactionsController@store');
+//editing data in mytransactions table
+Route::put('mytransactions', 'App\Http\Controllers\MyTransactionsController@store');
+
+//========order=========================
+//getting information from order table
+Route::get('userorder/{transaction_id}','App\Http\Controllers\OrderController@getByTransaction');
+Route::get('sellerorder/{store_id}','App\Http\Controllers\OrderController@getByStore');
+//=======storing data in order table
+Route::post('order','App\Http\Controllers\OrderController@store');

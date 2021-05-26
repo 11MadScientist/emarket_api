@@ -45,6 +45,7 @@ class CartController extends Controller
         $cart-> store_id = $request->input('store_id');
         $cart-> prod_id  = $request->input('prod_id');
         $cart-> prod_qty = $request->input('prod_qty');
+        $cart->prod_price= $request->input('prod_price');
         $cart-> total    = $request->input('total');
 
         if ($cart->save())
@@ -64,7 +65,7 @@ class CartController extends Controller
         $cart = DB::table('cart')
         ->where('acc_id', '=', $acc_id)
         ->get();
-        return CartResource::collection($cart);
+        return $cart;
         
     }
 
@@ -89,11 +90,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $cart = Cart::findOrFail($id);
-
-        if($cart->delete())
-        {
-            return new CartResource($cart);
-        }
+        $cart = DB::table('cart')->where('acc_id','=', $id)->delete();
+        return $cart;
     }
 }

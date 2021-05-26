@@ -38,7 +38,8 @@ class UserInfoController extends Controller
         $userinfo-> password    = $request->input('password');
         $userinfo-> email       = $request->input('email');
         $userinfo-> phonenumber = $request->input('phonenumber');
-        $userinfo->address      = $request->input('address');
+        $userinfo-> address     = $request->input('address');
+        $userinfo-> usertype    = $request->input('usertype');
 
         if ($userinfo->save())
         {

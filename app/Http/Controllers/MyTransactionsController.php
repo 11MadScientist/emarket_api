@@ -14,20 +14,16 @@ class MyTransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($acc_id)
     {
-        //
+        $mytransactions = DB::table('mytransactions')
+        ->where("acc_id", '=', $acc_id)
+        ->get();
+        return $mytransactions;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -37,27 +33,24 @@ class MyTransactionsController extends Controller
      */
     public function store(Request $request)
     {
-        $mytransactions = $request->isMethod('put') ? Cart::findOrFail($request->id) : new Cart;
+        $mytransactions = $request->isMethod('put') ? MyTransactions::findOrFail($request->id) : new MyTransactions;
 
         $mytransactions-> id                 = $request->input('id');
         $mytransactions-> acc_id             = $request->input('acc_id');
-        $mytransactions-> store_id           = $request->input('store_id');
-        $mytransactions-> prod_id            = $request->input('prod_id');
-        $mytransactions-> prod_qty           = $request->input('prod_qty');
+        $mytransactions-> grand_total        = $request->input('grand_total');
+        $mytransactions-> payment_mode       = $request->input('payment_mode');
         $mytransactions-> transaction_status = $request->input('transaction_status');
 
         if ($mytransactions->save())
         {
-            return new MyTransactionsResource($mytransactions);
+            $mytransactions = new MyTransactionsResource($mytransactions);
+            return $mytransactions;
         }
     }
 
     public function show($user_id)
     {
-        $mytransactions = DB::table('mytransactions')
-        ->where("acc_id", '=', $user_id)
-        ->get();
-        return MytransactionsResource::collection($mytransactions);
+        
     }
 
     /**

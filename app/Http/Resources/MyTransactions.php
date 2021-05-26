@@ -15,11 +15,10 @@ class MyTransactions extends JsonResource
     public function toArray($request)
     {
         return[
-            'id'       => $this->id,
-            'acc_id'   => $this->acc_id,
-            'store_id' => $this->store_id,
-            'prod_id'  => $this->prod_id,
-            'prod_qty' => $this->prod_qty,
+            'id'                 => $this->id,
+            'acc_id'             => $this->acc_id,
+            'grand_total'        => $this->grand_total,
+            'payment_mode'       => $this->payment_mode,
             'transaction_status' => $this->transaction_status, 
         ];
     }
